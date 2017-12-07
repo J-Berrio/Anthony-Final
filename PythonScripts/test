@@ -1,0 +1,18 @@
+import maya.cmds as cmds
+
+sels = cmds.ls(sl=True)
+last_jnt = ''
+
+for sel in sels:
+    cmds.select(clear=True)
+    pos = cmds.xform(sel, q=True, rotatePivot=True, ws=True)
+    jnt = cmds.joint(a=True, p=pos)
+
+    if last_jnt != '':
+        cmds.parent(jnt, last_jnt)
+
+    last_jnt = jnt
+
+    #this is for parenting joints in a hierarchy in python
+    #you make an empty last joint variable, then check for it
+    #and if it exists then do the parenting

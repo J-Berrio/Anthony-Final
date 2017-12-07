@@ -1,0 +1,17 @@
+import maya.cmds as cmds
+
+
+def templecompound():
+    cmds.polySphere()
+    cmds.select ('|pSphere1', r=True)
+    cmds.selectKey (cl=True)
+    cmds.move(-4,7.3, 0)
+    cmds.rename ("pSphere1", "Moon")
+    cmds.polyCube (w=6, h=0.5, d=6, sx=1, sy=1, sz=1, ax=(0, 1, 0 ), cuv=4, ch=1)
+    cmds.rename ("pCube1", "Temple")
+    cmds.select ('|Temple.f[1]', r=True)
+    cmds.polyExtrudeFacet('|Temple.f[1]', ch=1, kft=1, pvx=0, pvy=0.25, pvz=0,
+                          d=1, twt=0, tp=1, off=0, tk=0, sma=30 )
+    cmds.move (0, 3.02654, 0)
+    cmds.hilite ('Temple.f[1]')
+    cmds.select ('Temple.f[1]', add=True)
